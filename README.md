@@ -8,7 +8,7 @@ Mentor: Tal Michaeli
 
 Team Members: Ashmit JaiSarita Gupta (Me), Asif Saad, Roman Ledenov
 
-GitHub Repository of my work: devilkiller-ag/QNN-MNIST-Classification (github.com)
+Project Report: [Hashnode blog on Project Report by Ashmit JaiSarita Gupta](https://jaisarita.hashnode.dev/qcourse511-qnn)
 
 ## Workflow
 [🗸] Understanding the basics of Quantum Neural Networks and Classiq.
