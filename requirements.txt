@@ -1,3 +1,4 @@
 classiq
 torch
 torchvision
+tqdm
