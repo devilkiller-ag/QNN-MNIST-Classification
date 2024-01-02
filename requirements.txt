@@ -2,3 +2,5 @@ classiq
 torch
 torchvision
 tqdm
+torchinfo
+tensorboard
