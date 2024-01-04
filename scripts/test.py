@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 def test(
     model: nn.Module,
     data_loader: DataLoader,
-    atol=1e-4,
+    atol=0,
     device: str = 'cpu',
 ) -> float:
     num_correct = 0
@@ -24,7 +24,7 @@ def test(
             predictions = model(data)
             
             # Get a tensor of booleans, indicating if each label is close to the real label
-            is_prediction_correct = torch.isclose(predictions, labels.type(torch.float32), atol=atol)
+            is_prediction_correct = torch.isclose(predictions.argmax(dim=1), labels.argmax(dim=1), atol=atol)
             output_file = open("test_loop_output.txt", "a")
             print("----------------------------------------------------------------------------------------------------------------------------------------------", file=output_file)
             print(f"LABELS:: \n {labels} \n", file=output_file)
@@ -41,5 +41,5 @@ def test(
     
     # Calculate the accuracy
     accuracy = float(num_correct) / float(total)
-    print(f"Test Accuracy of the model: {accuracy * 100:.2f}")
-    return accuracy
+    print(f"Test Accuracy of the model: {accuracy * 100:.2f}%")
+    return accuracy * 100
