@@ -1,5 +1,8 @@
 import torch
 from torch.utils.tensorboard import SummaryWriter
+from datetime import datetime
+import os
+import pandas as pd
 
 def create_writer(experiment_name: str, 
                   model_name: str, 
@@ -19,16 +22,14 @@ def create_writer(experiment_name: str,
         torch.utils.tensorboard.writer.SummaryWriter(): Instance of a writer saving to log_dir.
 
     Example usage:
-        # Create a writer saving to "runs/2022-06-04/data_10_percent/effnetb2/5_epochs/"
+        # Create a writer saving to "runs/2022-06-04/data_10_percent/leqm3/5_epochs/"
         writer = create_writer(experiment_name="data_10_percent",
-                                model_name="effnetb2",
+                                model_name="leqm3",
                                 extra="5_epochs")
         # The above is the same as:
-        writer = SummaryWriter(log_dir="runs/2022-06-04/data_10_percent/effnetb2/5_epochs/")
+        writer = SummaryWriter(log_dir="runs/2022-06-04/data_10_percent/leqm3/5_epochs/")
     """
-    from datetime import datetime
-    import os
-
+    
     # Get timestamp of current date (all experiments on certain day live in same folder)
     timestamp = datetime.now().strftime("%Y-%m-%d") # returns current date in YYYY-MM-DD format
 
@@ -40,3 +41,25 @@ def create_writer(experiment_name: str,
         
     print(f"[INFO] Created SummaryWriter, saving to: {log_dir}...")
     return SummaryWriter(log_dir=log_dir)
+
+def write_train_results(
+    experiment_name,
+    model_name,
+    epochs,
+    results,
+): 
+    output_file_name = f"{experiment_name}_{model_name}_epochs_{epochs}.csv"
+    file_path = f"outputs/train_results/{output_file_name}"
+    
+    data = {
+        'Epoch': list(range(1, len(results['train_loss']) + 1)),
+        'Train Loss': results['train_loss']
+    }
+    
+    df = pd.DataFrame(data)
+    
+    if os.path.exists(file_path):
+        # If it exists, append data
+        df.to_csv(file_path, mode='a', index=False, header=False)
+    else:
+        df.to_csv(file_path, mode='w', index=False, header=True)
