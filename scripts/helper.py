@@ -47,7 +47,13 @@ def write_train_results(
     model_name,
     epochs,
     results,
-): 
+):
+    output_dir = "outputs/train_results/"
+    
+    # Check if the directory exists, and create it if not
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
     output_file_name = f"{experiment_name}_{model_name}_epochs_{epochs}.csv"
     file_path = f"outputs/train_results/{output_file_name}"
     
