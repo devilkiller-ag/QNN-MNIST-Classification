@@ -39,7 +39,7 @@ def post_process_fn(result: SavedResult) -> torch.Tensor:
     # print(f"PREDICTION LABELS:: \n {pred_labels} \n", file=output_file)
     # output_file.close()
     
-    return torch.tensor(pred_probs)
+    return pred_probs.clone().detach()
 
 class QNN(torch.nn.Module):
     def __init__(self, quantum_program, execute, post_process, *args, **kwargs) -> None:

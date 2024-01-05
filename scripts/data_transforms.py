@@ -9,7 +9,7 @@ def input_transform(image):
     """
     image = transforms.ToTensor()(image)
     image = transforms.CenterCrop(24)(image)
-    image = transforms.Resize(size = (4,4))(image)
+    image = transforms.Resize(size = (4,4), antialias=True)(image)
     image = image.squeeze()
     image_pixels = torch.flatten(image)
     angles = torch.sqrt(image_pixels / 256)
