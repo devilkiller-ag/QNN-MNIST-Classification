@@ -22,7 +22,7 @@ from scripts.test import test
 from scripts.save_model import save_model
 
 ## Authenticate Classiq
-classiq.authenticate()
+# classiq.authenticate()
 
 ## For setting up device agnostic code
 device = "cuda" if torch.cuda.is_available() else "cpu"
