@@ -25,12 +25,14 @@ def test(
             
             # Get a tensor of booleans, indicating if each label is close to the real label
             is_prediction_correct = torch.isclose(predictions.argmax(dim=1), labels.argmax(dim=1), atol=atol)
-            output_file = open("test_loop_output.txt", "a")
-            print("----------------------------------------------------------------------------------------------------------------------------------------------", file=output_file)
-            print(f"LABELS:: \n {labels} \n", file=output_file)
-            print(f"PREDICTIONS:: \n {predictions} \n", file=output_file)
-            print(f"IS PREDICTIONS CORRECT:: \n {is_prediction_correct} \n", file=output_file)
-            output_file.close()
+            
+            ### WRITE OUTPUT TO A FILE
+            # output_file = open("test_loop_output.txt", "a")
+            # print("----------------------------------------------------------------------------------------------------------------------------------------------", file=output_file)
+            # print(f"LABELS:: \n {labels} \n", file=output_file)
+            # print(f"PREDICTIONS:: \n {predictions} \n", file=output_file)
+            # print(f"IS PREDICTIONS CORRECT:: \n {is_prediction_correct} \n", file=output_file)
+            # output_file.close()
             
             # Count the amount of `True` predictions
             num_correct += is_prediction_correct.sum().item()

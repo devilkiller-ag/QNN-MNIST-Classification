@@ -30,14 +30,14 @@ def post_process_fn(result: SavedResult) -> torch.Tensor:
     pred_labels = torch.argmax(pred_probs)
     
     ### WRITE COUNTS, OUTPUT LOGITS, PRED PROBS, PRED LABELS to a file
-    output_file = open("post_process_output.txt", "a")
-    print("----------------------------------------------------------------------------------------------------------------------------------------------", file=output_file)
-    print(f"COUNTS:: \n {counts} \n", file=output_file)
-    print(f"LOGITS:: \n {logits} \n", file=output_file)
-    print(f"TRIMMED LOGITS:: \n {trimmed_logits} \n", file=output_file)
-    print(f"PREDICTION PROBABILITIES:: \n {pred_probs} \n", file=output_file)
-    print(f"PREDICTION LABELS:: \n {pred_labels} \n", file=output_file)
-    output_file.close()
+    # output_file = open("post_process_output.txt", "a")
+    # print("----------------------------------------------------------------------------------------------------------------------------------------------", file=output_file)
+    # print(f"COUNTS:: \n {counts} \n", file=output_file)
+    # print(f"LOGITS:: \n {logits} \n", file=output_file)
+    # print(f"TRIMMED LOGITS:: \n {trimmed_logits} \n", file=output_file)
+    # print(f"PREDICTION PROBABILITIES:: \n {pred_probs} \n", file=output_file)
+    # print(f"PREDICTION LABELS:: \n {pred_labels} \n", file=output_file)
+    # output_file.close()
     
     return torch.tensor(pred_probs)
 
