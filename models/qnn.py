@@ -27,7 +27,36 @@ def post_process_fn(result: SavedResult) -> torch.Tensor:
     pred_probs = torch.nn.functional.normalize(trimmed_logits, dim=0)
     
     # Convert the prediction probabilities into prediction labels
-    pred_labels = torch.argmax(pred_probs)
+    # pred_labels = torch.argmax(pred_probs)
+    
+    ### WRITE COUNTS, OUTPUT LOGITS, PRED PROBS, PRED LABELS to a file
+    # output_file = open("post_process_output.txt", "a")
+    # print("----------------------------------------------------------------------------------------------------------------------------------------------", file=output_file)
+    # print(f"COUNTS:: \n {counts} \n", file=output_file)
+    # print(f"LOGITS:: \n {logits} \n", file=output_file)
+    # print(f"TRIMMED LOGITS:: \n {trimmed_logits} \n", file=output_file)
+    # print(f"PREDICTION PROBABILITIES:: \n {pred_probs} \n", file=output_file)
+    # print(f"PREDICTION LABELS:: \n {pred_labels} \n", file=output_file)
+    # output_file.close()
+    
+    return pred_probs.clone().detach()
+
+def post_process_bin_fn(result: SavedResult) -> torch.Tensor:
+    counts: dict = result.value.counts
+    
+    # Calculate logits from counts
+    logits: float = torch.zeros(16)
+    for key, value in counts.items():
+        logits[int(key, 2)] = value
+    
+    # Trim the logits from length 16 to length 10 since we have only 10 labels
+    trimmed_logits = logits[:2]
+    
+    # Calculate prediction probabilities from logits by normalizing it
+    pred_probs = torch.nn.functional.normalize(trimmed_logits, dim=0)
+    
+    # Convert the prediction probabilities into prediction labels
+    # pred_labels = torch.argmax(pred_probs)
     
     ### WRITE COUNTS, OUTPUT LOGITS, PRED PROBS, PRED LABELS to a file
     # output_file = open("post_process_output.txt", "a")
