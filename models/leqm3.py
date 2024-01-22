@@ -44,17 +44,17 @@ def mixing(q: QArray[QBit]) -> None:
     Args:
         q (QArray[QBit]): Array of four Qubits to apply the mixing operation on.
     """
-    RZZ(theta="weight_0", target=q[0:2])
-    RZZ(theta="weight_1", target=q[1:3])
-    RZZ(theta="weight_2", target=q[2:4])
+    RXX(theta="weight_0", target=q[0:2])
+    RXX(theta="weight_1", target=q[1:3])
+    RXX(theta="weight_2", target=q[2:4])
+
+    # RZZ(theta="weight_3", target=q[0:2])
+    # RZZ(theta="weight_4", target=q[1:3])
+    # RZZ(theta="weight_5", target=q[2:4])
     
-    RXX(theta="weight_4", target=q[0:2])
-    RXX(theta="weight_5", target=q[1:3])
-    RXX(theta="weight_6", target=q[2:4])
-    
-    RYY(theta="weight_8", target=q[0:2])
-    RYY(theta="weight_9", target=q[1:3])
-    RYY(theta="weight_10", target=q[2:4])
+    # RYY(theta="weight_6", target=q[0:2])
+    # RYY(theta="weight_7", target=q[1:3])
+    # RYY(theta="weight_8", target=q[2:4])
 
 @QFunc
 def cz_block(q: QArray[QBit]) -> None:
