@@ -49,7 +49,7 @@ def post_process_bin_fn(result: SavedResult) -> torch.Tensor:
     for key, value in counts.items():
         logits[int(key, 2)] = value
     
-    # Trim the logits from length 16 to length 10 since we have only 10 labels
+    # Trim the logits from length 16 to length 2 since we have only 2 labels
     trimmed_logits = logits[:2]
     
     # Calculate prediction probabilities from logits by normalizing it
